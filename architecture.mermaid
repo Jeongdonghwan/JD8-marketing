@@ -1,0 +1,46 @@
+flowchart TB
+    subgraph Client["🌐 Client (Browser)"]
+        UI[React Frontend<br/>Vite + Tailwind CSS]
+    end
+
+    subgraph Pages["📄 페이지 구조"]
+        Home["/ 메인<br/>• Hero Banner<br/>• 서비스 카드 5개<br/>• Why JD8<br/>• 프로세스<br/>• 문의폼"]
+        SS["/smartstore<br/>스마트스토어"]
+        CP["/coupang<br/>쿠팡"]
+        PL["/place<br/>플레이스"]
+        SA["/search-ad<br/>검색광고"]
+        RV["/review<br/>리뷰"]
+    end
+
+    subgraph Components["🧩 주요 컴포넌트"]
+        Header["Header<br/>네비게이션"]
+        Footer["Footer<br/>회사정보"]
+        Cards["ServiceCards<br/>서비스 카드 그리드"]
+        Form["InquiryForm<br/>문의 폼"]
+        Logo["Logo<br/>SVG 로고"]
+    end
+
+    subgraph Backend["⚙️ Backend (Flask)"]
+        API["REST API<br/>/api/inquiry"]
+        Models["SQLAlchemy<br/>Models"]
+    end
+
+    subgraph Database["💾 Database"]
+        SQLite[(SQLite<br/>jd8.db)]
+    end
+
+    UI --> Home
+    Home --> SS & CP & PL & SA & RV
+    
+    UI --> Header & Footer & Form
+    Home --> Cards
+    
+    Form -->|POST /api/inquiry| API
+    API --> Models
+    Models --> SQLite
+
+    style Client fill:#dbeafe,stroke:#2563eb
+    style Pages fill:#f0fdf4,stroke:#16a34a
+    style Components fill:#fef3c7,stroke:#d97706
+    style Backend fill:#fce7f3,stroke:#db2777
+    style Database fill:#f3e8ff,stroke:#9333ea
