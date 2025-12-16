@@ -436,34 +436,6 @@ function ServiceDetail({ service }) {
                   맞춤형 마케팅 전략을 제안해 드립니다.
                 </p>
 
-                {/* 연락처 정보 */}
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center`}>
-                      <Icon name="phone" className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">전화 문의</p>
-                      <a href="tel:1566-3046" className="text-lg font-bold text-gray-900 hover:text-primary-600 transition-colors">
-                        1566-3046
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center`}>
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">이메일 문의</p>
-                      <a href="mailto:jdhwan227@naver.com" className="text-lg font-bold text-gray-900 hover:text-primary-600 transition-colors">
-                        jdhwan227@naver.com
-                      </a>
-                    </div>
-                  </div>
-                </div>
 
                 {/* 보장 배지 */}
                 <div className="flex flex-wrap gap-3">

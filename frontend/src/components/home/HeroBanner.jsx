@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react'
+import { useInquiry } from '../../hooks/useInquiry'
 
 function HeroBanner() {
   const [isVisible, setIsVisible] = useState(false)
+  const { submit, loading, success } = useInquiry()
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    service: ''
+  })
 
   useEffect(() => {
     setIsVisible(true)
@@ -11,6 +18,23 @@ function HeroBanner() {
     const inquirySection = document.getElementById('inquiry-form')
     if (inquirySection) {
       inquirySection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleQuickSubmit = async (e) => {
+    e.preventDefault()
+    if (!formData.name || !formData.phone) {
+      alert('이름과 연락처를 입력해주세요.')
+      return
+    }
+    await submit({
+      name: formData.name,
+      phone: formData.phone,
+      message: `[빠른상담] 관심서비스: ${formData.service || '미선택'}`,
+      service_type: formData.service || '빠른상담'
+    })
+    if (!loading) {
+      setFormData({ name: '', phone: '', service: '' })
     }
   }
 
@@ -128,32 +152,53 @@ function HeroBanner() {
                 <p className="text-gray-600 text-sm">1분이면 충분해요!</p>
               </div>
 
-              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); scrollToInquiry(); }}>
-                <input
-                  type="text"
-                  placeholder="이름"
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                />
-                <input
-                  type="tel"
-                  placeholder="연락처"
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                />
-                <select className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-500">
-                  <option value="">관심 서비스 선택</option>
-                  <option value="smartstore">스마트스토어 마케팅</option>
-                  <option value="coupang">쿠팡 마케팅</option>
-                  <option value="place">플레이스 마케팅</option>
-                  <option value="search">검색광고</option>
-                  <option value="review">리뷰 마케팅</option>
-                </select>
-                <button
-                  type="submit"
-                  className="w-full btn-primary"
-                >
-                  무료 상담 받기
-                </button>
-              </form>
+              {success ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">상담 신청 완료!</h4>
+                  <p className="text-gray-600 text-sm">빠른 시일 내에 연락드리겠습니다.</p>
+                </div>
+              ) : (
+                <form className="space-y-4" onSubmit={handleQuickSubmit}>
+                  <input
+                    type="text"
+                    placeholder="이름"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="연락처"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  />
+                  <select
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-500"
+                  >
+                    <option value="">관심 서비스 선택</option>
+                    <option value="스마트스토어 마케팅">스마트스토어 마케팅</option>
+                    <option value="쿠팡 마케팅">쿠팡 마케팅</option>
+                    <option value="플레이스 마케팅">플레이스 마케팅</option>
+                    <option value="검색광고">검색광고</option>
+                    <option value="리뷰 마케팅">리뷰 마케팅</option>
+                  </select>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full btn-primary disabled:opacity-50"
+                  >
+                    {loading ? '접수 중...' : '무료 상담 받기'}
+                  </button>
+                </form>
+              )}
 
               <p className="text-xs text-gray-500 text-center mt-4">
                 ✓ 개인정보는 상담 목적으로만 사용됩니다

@@ -33,22 +33,11 @@ function FloatingCTA() {
       {/* 확장 메뉴 */}
       {isExpanded && (
         <div className="flex flex-col gap-2 animate-fade-in-up">
-          {/* 전화 */}
-          <a
-            href="tel:1566-3046"
-            className="flex items-center gap-3 bg-white px-4 py-3 rounded-full shadow-strong hover:shadow-glow transition-all duration-300 group"
-          >
-            <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-            </div>
-            <span className="font-medium text-gray-700 group-hover:text-green-600 transition-colors">1566-3046</span>
-          </a>
-
           {/* 카카오톡 */}
           <a
-            href="#"
+            href="https://pf.kakao.com/_Izxnxgn"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-3 bg-white px-4 py-3 rounded-full shadow-strong hover:shadow-glow transition-all duration-300 group"
           >
             <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">

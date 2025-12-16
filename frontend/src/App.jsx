@@ -11,6 +11,7 @@ const Place = lazy(() => import('./pages/Place'))
 const SearchAd = lazy(() => import('./pages/SearchAd'))
 const Review = lazy(() => import('./pages/Review'))
 const MetaAd = lazy(() => import('./pages/MetaAd'))
+const SpecSheet = lazy(() => import('./pages/SpecSheet'))
 
 // 로딩 스피너
 function LoadingSpinner() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/search-ad" element={<SearchAd />} />
             <Route path="/review" element={<Review />} />
             <Route path="/meta-ad" element={<MetaAd />} />
+            <Route path="/spec-sheet" element={<SpecSheet />} />
           </Routes>
         </Suspense>
       </main>

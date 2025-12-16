@@ -4,7 +4,10 @@
       "Bash(dir:*)",
       "Bash(npm run dev:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(python -c:*)",
+      "Bash(chcp 65001)",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []
