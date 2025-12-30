@@ -17,7 +17,9 @@ def create_app():
 
     # 라우트 등록
     from .routes.inquiry import inquiry_bp
+    from .routes.unsubscribe import unsubscribe_bp
     app.register_blueprint(inquiry_bp, url_prefix='/api')
+    app.register_blueprint(unsubscribe_bp)
 
     # DB 테이블 생성
     with app.app_context():
