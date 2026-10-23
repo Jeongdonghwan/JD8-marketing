@@ -13,10 +13,11 @@ import {
 } from '../../../lib/dongs';
 import { portfolios } from '../../../data/portfolios';
 import { getIndustryBySlug, industryPath } from '../../../lib/industries';
-import { getAllServices, servicePath } from '../../../lib/services';
+import { getAllServices, servicePath, serviceEncodedPath } from '../../../lib/services';
 import { markdownToHtml } from '../../../lib/markdown';
 import JsonLd from '../../../components/seo/JsonLd';
-import { breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from '../../../lib/jsonld';
+import { breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, itemListJsonLd } from '../../../lib/jsonld';
+import { ogMeta } from '../../../lib/site';
 
 export const dynamicParams = false;
 
@@ -36,8 +37,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       description: doc.description,
       keywords: doc.keywords,
       alternates: { canonical: regionEncodedPath(doc) },
-      openGraph: { title: doc.title, description: doc.description, url: regionEncodedPath(doc) },
-      twitter: { title: doc.title, description: doc.description },
+      ...ogMeta(doc.title, doc.description, regionEncodedPath(doc)),
     };
   }
   const dong = getDongByUrlSlug(params.slug);
@@ -46,10 +46,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return {
     title: { absolute: c.title },
     description: c.description,
-    keywords: [`${dong.dong} 홈페이지제작`, `${dong.dong} 홈페이지 제작`, `${dong.gu} 홈페이지제작`, `${dong.dong} 웹사이트 제작`],
+    keywords: [`${dong.dong} 마케팅`, `${dong.dong} 마케팅 대행`, `${dong.gu} 마케팅 대행`, `${dong.dong} 플레이스 마케팅`, `${dong.dong} 광고 대행`],
     alternates: { canonical: dongEncodedPath(dong) },
-    openGraph: { title: c.title, description: c.description, url: dongEncodedPath(dong) },
-    twitter: { title: c.title, description: c.description },
+    ...ogMeta(c.title, c.description, dongEncodedPath(dong)),
   };
 }
 
@@ -227,6 +226,10 @@ function DongPage({ dong }: { dong: any }) {
               path,
               area: { name: dong.dong, containedIn: dong.containedIn },
             }),
+            itemListJsonLd(
+              `${dong.dong} 마케팅 대행 서비스`,
+              getAllServices().map((s) => ({ name: s.name, url: serviceEncodedPath(s) })),
+            ),
           ]}
         />
 

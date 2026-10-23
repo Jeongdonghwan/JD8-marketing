@@ -1,20 +1,17 @@
 import type { Metadata } from 'next';
+import { ogMeta } from '../../lib/site';
 import Link from 'next/link';
 import { getAllPosts } from '../../lib/posts';
 import PostList from '../../components/blog/PostList';
 import JsonLd from '../../components/seo/JsonLd';
-import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 
 export const metadata: Metadata = {
-  title: '홈페이지 제작 블로그 - 비용, 기획, SEO 가이드',
+  title: '마케팅 인사이트 - 플레이스·블로그·광고 실무 가이드',
   description:
-    '홈페이지 제작 비용부터 업종별 기획 노하우, 네이버·구글 검색 노출 방법까지. 홈페이지 제작 전문 JD8이 실무 경험을 바탕으로 알려드립니다.',
+    '네이버 플레이스 상위노출, 블로그·인스타 운영, 광고비 관리까지. 마케팅 대행 JD8이 사장님이 바로 써먹을 수 있는 실무 노하우를 정리합니다.',
   alternates: { canonical: '/blog/' },
-  openGraph: {
-    title: '마케팅 인사이트 | JD8',
-    description: '홈페이지 제작 비용, 기획, SEO — 실무 노하우를 공유합니다.',
-    url: '/blog/',
-  },
+  ...ogMeta('마케팅 인사이트 | JD8', '플레이스·블로그·광고 마케팅 — 사장님이 바로 써먹는 실무 노하우를 공유합니다.', '/blog/'),
 };
 
 export default function BlogListPage() {
@@ -24,10 +21,13 @@ export default function BlogListPage() {
     <main className="content-page">
       <div className="content-container">
         <JsonLd
-          data={breadcrumbJsonLd([
-            { name: '홈', path: '/' },
-            { name: '블로그', path: '/blog/' },
-          ])}
+          data={[
+            breadcrumbJsonLd([
+              { name: '홈', path: '/' },
+              { name: '블로그', path: '/blog/' },
+            ]),
+            itemListJsonLd('JD8 마케팅 인사이트', posts.map((p) => ({ name: p.title, url: `/blog/${p.slug}/` }))),
+          ]}
         />
         <nav className="breadcrumb" aria-label="브레드크럼">
           <Link href="/">홈</Link>
@@ -37,9 +37,9 @@ export default function BlogListPage() {
 
         <header className="page-header">
           <span className="page-eyebrow">BLOG</span>
-          <h1>홈페이지 제작 블로그</h1>
+          <h1>마케팅 인사이트</h1>
           <p className="page-lead">
-            제작 비용, 업종별 기획, 검색 노출(SEO)까지 — 홈페이지를 준비하는 사장님들을 위한 실무 가이드를 연재합니다.
+            플레이스, 블로그, 광고, 스마트스토어까지 — 매출로 이어지는 마케팅을 고민하는 사장님들을 위한 실무 가이드를 연재합니다.
           </p>
         </header>
 

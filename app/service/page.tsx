@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ogMeta } from '../../lib/site';
 import Link from 'next/link';
 import { getAllServices, servicePath } from '../../lib/services';
 import JsonLd from '../../components/seo/JsonLd';
@@ -9,11 +10,7 @@ export const metadata: Metadata = {
   description:
     '랜딩페이지 제작, 회사소개 홈페이지, 쇼핑몰, 홈페이지 리뉴얼까지 — 목적별 제작 서비스의 구성과 비용을 안내합니다. JD8은 모든 서비스를 30만원부터, 평균 7일 안에 제작합니다.',
   alternates: { canonical: '/service/' },
-  openGraph: {
-    title: '마케팅 서비스 안내 | JD8',
-    description: '랜딩페이지, 회사소개, 쇼핑몰, 리뉴얼 — 목적별 제작 서비스 안내.',
-    url: '/service/',
-  },
+  ...ogMeta('마케팅 서비스 안내 | JD8', '플레이스·블로그·인스타·광고·스마트스토어·쿠팡 — 목적별 마케팅 대행 서비스 안내.', '/service/'),
 };
 
 export default function ServiceHubPage() {

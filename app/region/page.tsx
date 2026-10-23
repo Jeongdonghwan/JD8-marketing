@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ogMeta } from '../../lib/site';
 import Link from 'next/link';
 import { getAllDongs, dongPath } from '../../lib/dongs';
 import JsonLd from '../../components/seo/JsonLd';
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   description:
     '서울 전 지역과 경기, 전국 주요 도시의 동네 상권별 마케팅 대행 안내. 플레이스 관리, 지역 키워드 콘텐츠, 광고 운영까지 비대면으로 진행합니다.',
   alternates: { canonical: '/region/' },
-  openGraph: { title: '지역별 마케팅 대행 | JD8', description: '전국 동네 상권별 마케팅 대행 안내.', url: '/region/' },
+  ...ogMeta('지역별 마케팅 대행 | JD8', '전국 동네 상권별 마케팅 대행 안내.', '/region/'),
 };
 
 export default function RegionHubPage() {

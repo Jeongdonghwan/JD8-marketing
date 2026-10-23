@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: DEFAULT_TITLE,
-    template: '%s | JD8 홈페이지 제작',
+    template: '%s | JD8 마케팅',
   },
   description: DEFAULT_DESCRIPTION,
   keywords: ['마케팅 대행', '네이버 플레이스 마케팅', '블로그 마케팅', '인스타그램 마케팅', '퍼포먼스 광고', '소상공인 마케팅', 'JD8'],
