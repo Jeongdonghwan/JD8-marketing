@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   keywords: ['마케팅 대행', '네이버 플레이스 마케팅', '블로그 마케팅', '인스타그램 마케팅', '퍼포먼스 광고', '소상공인 마케팅', 'JD8'],
   authors: [{ name: 'JD8 에이전시' }],
   robots: { index: true, follow: true },
-  alternates: { canonical: '/', types: { 'application/rss+xml': '/rss.xml' } },
+  alternates: { canonical: '/' },
   icons: { icon: '/favicon.svg' },
   openGraph: {
     type: 'website',

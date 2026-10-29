@@ -37,7 +37,6 @@ const Header = () => {
   const pageItems = [
     { label: '마케팅 서비스', href: '/service/' },
     { label: '지역별 대행', href: '/region/' },
-    { label: '웹문서 제작', href: '/웹문서/' },
     { label: '블로그', href: '/blog/' },
   ];
 
