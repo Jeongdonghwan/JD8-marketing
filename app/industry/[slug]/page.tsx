@@ -71,7 +71,7 @@ export default function IndustryMarketingPage({ params }: { params: { slug: stri
         <header className="page-header">
           <span className="page-eyebrow">{i.group}</span>
           <h1>{c.h1}</h1>
-          <p className="page-lead">{c.description}</p>
+          <Paras text={c.description} per={1} className="page-lead" />
         </header>
         <aside className="wd-summary" aria-label="핵심 요약">
           <strong>핵심 요약</strong>

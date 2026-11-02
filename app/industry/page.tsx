@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Paras from '../../components/webdoc/Paras';
 import { ogMeta } from '../../lib/site';
 import { getOpenMkt, mktPath, mktOg } from '../../lib/industryMkt';
 import JsonLd from '../../components/seo/JsonLd';
@@ -38,7 +39,7 @@ export default function IndustryHub() {
         <header className="page-header">
           <span className="page-eyebrow">BY INDUSTRY</span>
           <h1>업종별 마케팅 대행</h1>
-          <p className="page-lead">{DESC}</p>
+          <Paras text={DESC} per={1} className="page-lead" />
         </header>
         <section className="content-section">
           <h2>업종마다 마케팅 순서가 다른 이유는 무엇일까요?</h2>
