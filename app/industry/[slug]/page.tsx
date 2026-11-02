@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Paras from '../../../components/webdoc/Paras';
 import { notFound } from 'next/navigation';
 import { ogMeta } from '../../../lib/site';
 import { getOpenMkt, getMkt, buildMktContent, mktPath, mktEncodedPath, mktOg, jd8Links, isOffice, DISCLAIMER } from '../../../lib/industryMkt';
@@ -84,9 +85,7 @@ export default function IndustryMarketingPage({ params }: { params: { slug: stri
         <section className="content-section">
           <h2>{c.whereH2}</h2>
           {c.where.map((t) => (
-            <p key={t} className="wd-p">
-              {t}
-            </p>
+            <Paras key={t} text={t} />
           ))}
         </section>
 
@@ -139,7 +138,7 @@ export default function IndustryMarketingPage({ params }: { params: { slug: stri
 
         <section className="content-section">
           <h2>{c.blogH2}</h2>
-          <p className="wd-p">{c.blog}</p>
+          <Paras text={c.blog} />
         </section>
 
         <section className="content-section">

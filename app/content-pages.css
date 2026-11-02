@@ -801,3 +801,19 @@
 .wd-disclaimer { margin: 14px 0 0; font-size: 0.78rem; opacity: 0.75; }
 .wd-table-plain td:last-child { display: table-cell !important; color: var(--text); font-size: 0.92rem; word-break: keep-all; }
 .wd-table-plain th:last-child { display: table-cell !important; }
+
+/* ===== 가독성: 한글 단어 단위 줄바꿈, 문단 간격 ===== */
+.content-page { word-break: keep-all; overflow-wrap: break-word; }
+.content-page .wd-p, .content-page .prose p, .content-page .static-faq .qa p, .content-page .feature-card p { line-height: 1.9; }
+.wd-p { font-size: 1.02rem; margin: 0 0 16px; }
+.content-section { margin-bottom: 52px; }
+.content-section h2 { line-height: 1.45; }
+.wd-summary li { margin: 6px 0; }
+.wd-table td, .wd-table th { line-height: 1.65; vertical-align: top; }
+.wd-table-plain td:first-child { white-space: nowrap; font-weight: 600; }
+.feature-card p { font-size: 0.95rem; }
+@media (max-width: 600px) {
+  .wd-p { font-size: 1rem; }
+  .wd-table-plain td:first-child { white-space: normal; }
+  .content-section { margin-bottom: 40px; }
+}
