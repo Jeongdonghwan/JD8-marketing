@@ -72,7 +72,7 @@ export const mktOg = (slug: string) => `/og/industry/${slug}.jpg`;
 
 // ---- jd8.co.kr 링크 (같은 업종으로만, 열린 페이지로만) ----
 export const JD8 = 'https://jd8.co.kr';
-let linkCache: Record<string, { webdoc: string; homepage: string; homepageReady: string }> | null = null;
+let linkCache: Record<string, { webdoc: string; webdocReady?: string; homepage: string; homepageReady: string }> | null = null;
 export function jd8Links(name: string) {
   if (!linkCache) {
     const f = path.join(DIR, 'jd8-links.json');
@@ -81,22 +81,23 @@ export function jd8Links(name: string) {
   const l = linkCache![name];
   if (!l) return null;
   const enc = (p: string) => p.split('/').map((x) => (x ? encodeURIComponent(x) : x)).join('/');
-  return { webdoc: JD8 + enc(l.webdoc), homepage: todayKst() >= l.homepageReady ? JD8 + enc(l.homepage) : null };
+  const t = todayKst();
+  return { webdoc: !l.webdocReady || t >= l.webdocReady ? JD8 + enc(l.webdoc) : null, homepage: t >= l.homepageReady ? JD8 + enc(l.homepage) : null };
 }
 
 // ---- 문장 도구 ----
-const hash = (s: string) => {
+export const hash = (s: string) => {
   let h = 2166136261;
   for (const ch of s) h = Math.imul(h ^ ch.codePointAt(0)!, 16777619) >>> 0;
   h ^= h >>> 15;
   h = Math.imul(h, 2246822507) >>> 0;
   return (h ^ (h >>> 13)) >>> 0;
 };
-const pick = <T,>(a: T[], seed: string) => a[hash(seed) % a.length];
+export const pick = <T,>(a: T[], seed: string) => a[hash(seed) % a.length];
 const H = 0xac00;
 const bat = (c: string) => (c.charCodeAt(0) - H) % 28;
 const withB = (c: string, b: number) => String.fromCharCode(c.charCodeAt(0) - bat(c) + b);
-function polite(clause: string) {
+export function polite(clause: string) {
   const s = clause.trim().replace(/[.。]$/, '');
   if (!s.endsWith('다')) return s + '.';
   const stem = s.slice(0, -1);
@@ -112,7 +113,7 @@ const hasB = (w: string) => {
   if (/[a-zA-Z0-9]/.test(c)) return /[lmnLMN013678]$/.test(c);
   return c.charCodeAt(0) >= H && c.charCodeAt(0) <= 0xd7a3 && bat(c) !== 0;
 };
-const j = (w: string, a: string, b: string) => w + (hasB(w) ? a : b);
+export const j = (w: string, a: string, b: string) => w + (hasB(w) ? a : b);
 
 const OFFICE = ['회생·채무', '법률·전문직', '대출·금융'];
 const VISUAL = ['반려동물', '행사·사진·웨딩', '커튼·창호·인테리어', '세탁·수선', '조경·농업', '간판·광고물'];

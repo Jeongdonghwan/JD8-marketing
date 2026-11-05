@@ -5,6 +5,7 @@ import { getAllPosts } from '../lib/posts';
 import { getAllServices, serviceEncodedPath } from '../lib/services';
 import { getAllDongs, dongEncodedPath } from '../lib/dongs';
 import { getOpenMkt, mktEncodedPath } from '../lib/industryMkt';
+import { getOpenBrands, brandEncodedPath } from '../lib/brandMkt';
 
 // lastmod는 실제 내용이 바뀐 시각만 쓴다. 빌드 시각(new Date())을 박으면 매 빌드마다 전 URL이
 // "수정됨"이 되어 검색엔진이 lastmod 신호를 무시한다.
@@ -43,6 +44,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   if (mkt.length) {
     entries.push({ url: `${SITE_URL}/industry/`, lastModified: latest([...mkt.map((i) => i.openDate), mktData]), changeFrequency: 'weekly', priority: 0.8 });
     for (const i of mkt) entries.push({ url: `${SITE_URL}${mktEncodedPath(i.slug)}`, lastModified: latest([i.openDate, mktData]), changeFrequency: 'monthly', priority: 0.7 });
+  }
+  const brands = getOpenBrands();
+  const brandData = mtime('data/industry/brands.json', 'lib/brandMkt.ts');
+  if (brands.length) {
+    entries.push({ url: `${SITE_URL}/brand/`, lastModified: latest([...brands.map((b) => b.openDate), brandData]), changeFrequency: 'weekly', priority: 0.8 });
+    for (const b of brands) entries.push({ url: `${SITE_URL}${brandEncodedPath(b.slug)}`, lastModified: latest([b.openDate, brandData]), changeFrequency: 'monthly', priority: 0.7 });
   }
   for (const p of posts) {
     entries.push({ url: `${SITE_URL}/blog/${p.slug}/`, lastModified: new Date(p.updatedAt || p.date), changeFrequency: 'monthly', priority: 0.7 });

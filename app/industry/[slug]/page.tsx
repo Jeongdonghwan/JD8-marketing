@@ -148,7 +148,7 @@ export default function IndustryMarketingPage({ params }: { params: { slug: stri
               <li key={t}>{t}</li>
             ))}
           </ol>
-          {jd8 && (
+          {jd8 && jd8.webdoc && (
             <p className="wd-p">
               {office ? '상담 지역' : '영업 지역'}마다 검색 페이지를 두는 방법은 JD8의 <a href={jd8.webdoc}>{i.name} 웹문서(지역 검색 페이지) 안내</a>에 정리돼 있습니다
               {jd8.homepage ? (
